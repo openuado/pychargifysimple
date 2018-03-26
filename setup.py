@@ -13,7 +13,7 @@ from setuptools import setup, find_packages
 setup(
     name='pychargifysimple',
     version='0.1',
-    description='Chargify API wrapper.'
+    description='Chargify API wrapper.',
     long_description='''
 Chargify API wrapper with a web module.
 ''',
