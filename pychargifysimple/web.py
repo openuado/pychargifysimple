@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """A module to manage the web part of chargify like delete subscription."""
-import mechanicalsoup
-from fake_useragent import UserAgent
+from pychargifysimple.context_manager import login
 
 
 class ChargifyWeb(object):
@@ -33,20 +32,9 @@ class ChargifyWeb(object):
         @param subscription: The subscription id
         @type param: int
         """
-        ua = UserAgent()
-        browser = mechanicalsoup.StatefulBrowser(user_agent=ua.chrome)
-
-        browser.open('https://app.chargify.com/login.html')
-        browser.select_form('#new_user_session')
-
-        browser['user_session[login]'] = self.user
-        browser['user_session[password]'] = self.password
-        browser.submit_selected()
-
-        browser.open(
-            '{url}/subscriptions/{subscription}/delete'.format(
-                url=self.url, subscription=subscription))
-        browser.select_form('#delete_subscription_form')
-        browser.submit_selected()
-
-        browser.close()
+        with login(self.user, self.password) as browser:
+            browser.open(
+                '{url}/subscriptions/{subscription}/delete'.format(
+                    url=self.url, subscription=subscription))
+            browser.select_form('#delete_subscription_form')
+            browser.submit_selected()
