@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 """A module to manage the web part of chargify like delete subscription."""
+import logging
+
 from mechanicalsoup.browser import LinkNotFoundError
 
 from pychargifysimple.context_manager import login
+
+
+logger = logging.getLogger(__name__)
 
 
 class ChargifyWeb(object):
@@ -42,6 +47,9 @@ class ChargifyWeb(object):
             try:
                 browser.select_form('#delete_subscription_form')
             except LinkNotFoundError:
+                logger.error(
+                    'The subscription {subscription} not found'.format(
+                        subscription=subscription))
                 return
 
             browser.submit_selected()
