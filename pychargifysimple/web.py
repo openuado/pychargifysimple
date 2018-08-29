@@ -24,7 +24,7 @@ class ChargifyWeb(object):
         @type user: str
 
         @param password: The password
-        @type user: str
+        @type password: str
 
         @param url: The chargify url
         @type url: str
