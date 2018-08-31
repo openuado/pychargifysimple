@@ -9,6 +9,29 @@ class ChargifySubscription(Chargify):
     """
     base = 'subscriptions'
 
+    def subscription_list(self, **kwargs):
+        """To read subscription list"""
+        url = '{base}.json'.format(base=self.base)
+
+        if 'page' not in kwargs:
+            kwargs['page'] = 1
+
+        return self._call_api(url, method='get', params=kwargs).json()
+
+    def get_all_subscription(self, **kwargs):
+        """To read all subscription"""
+        if 'page' not in kwargs:
+            kwargs['page'] = 1
+
+        while True:
+            all_subscription = self.subscription_list(**kwargs)
+
+            if not all_subscription:
+                break
+
+            kwargs['page'] += 1
+            yield all_subscription
+
     def get_subscription(self, subscription):
         """To read a subscription.
 
