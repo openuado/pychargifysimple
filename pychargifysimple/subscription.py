@@ -41,8 +41,12 @@ class ChargifySubscription(Chargify):
         @return: The subscription detail
         @rtype : dict
         """
-        return self._call_api('{base}/{subscription}.json'.format(
-            base=self.base, subscription=subscription), method='get').json()
+        return self._call_api(
+            '{base}/{subscription}.json'.format(
+                base=self.base, subscription=subscription
+            ),
+            method='get'
+        ).json()
 
     def change_next_billing_at(self, subscription, next_billing_at):
         """To change the next billing date of a subscription.
@@ -57,7 +61,8 @@ class ChargifySubscription(Chargify):
         @rtype : dict
         """
         url = '{base}/{subscription}.json'.format(
-            base=self.base, subscription=subscription)
+            base=self.base, subscription=subscription
+        )
         data = {
             'subscription': {
                 'next_billing_at': next_billing_at.isoformat()
@@ -79,12 +84,9 @@ class ChargifySubscription(Chargify):
         @rtype : dict
         """
         url = '{base}/{subscription}.json'.format(
-            base=self.base, subscription=subscription)
-        data = {
-            'subscription': {
-                'expires_at': expires_at.isoformat()
-            }
-        }
+            base=self.base, subscription=subscription
+        )
+        data = {'subscription': {'expires_at': expires_at.isoformat()}}
 
         return self._call_api(url, 'put', data=data).json()
 
@@ -101,7 +103,8 @@ class ChargifySubscription(Chargify):
         @rtype : dict
         """
         url = '{base}/{subscription}/purge.json'.format(
-            base=self.base, subscription=subscription, customer=customer)
+            base=self.base, subscription=subscription, customer=customer
+        )
         data = {'ack': customer}
 
         return self._call_api(url, 'post', params=data).json()

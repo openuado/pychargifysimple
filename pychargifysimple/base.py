@@ -21,14 +21,13 @@ class Chargify(object):
         self.api_key = api_key
         self.subdomain = subdomain
         self.url = '{subdomain}.{host}'.format(
-            subdomain=self.subdomain, host=self.host)
+            subdomain=self.subdomain, host=self.host
+        )
 
     def _call_api(self, path, method, params=None, data=None):
         request = getattr(requests, method)
         url = 'https://{url}/{path}'.format(url=self.url, path=path)
-        extra_parameters = {
-            'auth': (self.api_key, 'x')
-        }
+        extra_parameters = {'auth': (self.api_key, 'x')}
 
         if data:
             extra_parameters['json'] = data

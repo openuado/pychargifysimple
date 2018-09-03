@@ -8,7 +8,7 @@
 # http://www.opensource.org/licenses/MIT-license
 # Copyright (c) 2015, Hobbestigrou <hobbestigrou@erakis.eu>
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name='pychargifysimple',
@@ -35,11 +35,8 @@ Chargify API wrapper with a web module.
     ],
     packages=find_packages(),
     include_package_data=False,
-    install_requires=[
-        'MechanicalSoup', 'fake-useragent'
-    ],
+    install_requires=['MechanicalSoup', 'fake-useragent'],
     entry_points={
-        'console_scripts': [
-        ],
+        'console_scripts': [],
     },
 )
