@@ -2,8 +2,9 @@
 """A module to manage the web part of chargify like delete subscription."""
 import logging
 
+from .context_manager import login
+
 from mechanicalsoup.browser import LinkNotFoundError
-from pychargifysimple.context_manager import login
 
 logger = logging.getLogger(__name__)
 

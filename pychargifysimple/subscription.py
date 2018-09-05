@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from pychargifysimple.base import Chargify
+from .base import Chargify
 
 
 class ChargifySubscription(Chargify):
