@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from contextlib import contextmanager
 
-import mechanicalsoup
 from fake_useragent import UserAgent
+
+import mechanicalsoup
 
 
 @contextmanager
